@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 第二种方式  局部注册-->
+    <my-component></my-component>
+
+    <!-- Vue组件模板受html限制 table中只允许tr td th,其他限制元素 ul ol select
+        可使用 is属性来挂载组件
+        ！！注意；使用字符串 是不受限制的
+   -->
+   <table>
+     <tbody is="my-component"></tbody>
+   </table>
+
+   <!-- 组件除了 template 还有 data computed methods
+      （data必须是函数 然后将数据 return出去） -->
+
+    <my-demo></my-demo>
+
+
+
+    <my-demo1></my-demo1>
+    <my-demo1></my-demo1>
+    <my-demo1></my-demo1>
+
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+     var Child = {
+       template: '<div>局部注册组件内容</div>'
+     };
+
+     var Demo ={
+       template: '<div>{{message}}</div>',
+       data: function () {
+         return {
+           message: "demo"
+         }
+       }
+     };
+     var Demo1 ={
+       template: '<div @click="counter++">{{counter}}</div>',
+       data: function () {
+         return {
+           counter: 0
+         }
+       }
+     };
+     var app = new Vue({
+       el: '#app',
+       data: {
+         message:'message'
+       },
+       components:{
+         'my-component':Child,
+         'my-demo' : Demo,
+         'my-demo1' : Demo1
+       }
+     });
+  </script>
+</body>
+</html>

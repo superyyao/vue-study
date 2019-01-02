@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- v-model 修饰符 控制数据同步时机 -->
+    <!-- .lazy 在失去焦点或回车时才更新 -->
+    <input type="text" v-model.lazy="message">
+    <p>{{message}}</p>
+
+    <!-- .number 输入转为Number 类型 -->
+    <input type="number" v-model.number="message1">
+    <p>{{ typeof message1}}</p>
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js "></script>
+  <script>
+     var app = new Vue({
+       el: '#app',
+       data: {
+         message: '',
+         message1: 123
+       },
+       methods: {
+
+       }
+     })
+  </script>
+</body>
+</html>

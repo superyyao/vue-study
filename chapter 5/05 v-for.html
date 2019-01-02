@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    [v-cloak]{
+      display:none;
+    }
+  </style>
+
+</head>
+<body>
+  <div id="app" v-cloak>
+    <ul>
+      <li v-for="book in books">{{book.name}}</li>
+    </ul>
+    <!-- 索引 -->
+    <ul>
+      <li v-for="(book, index ) in books">{{index}}---{{book.name}}</li>
+    </ul>
+
+    <!-- v-for 也支持使用 template 将多个元素进行渲染 -->
+    <ul>
+      <template v-for="book in books" >
+        <li data-id="{book}">book name: {{book.name}}</li>
+        <li>book author: {{book.author}}</li>
+      </template>
+    </ul>
+
+
+   <!--  遍历对象属性 -->
+   <p v-for="value in user">{{ value }}</p>
+
+   <!--  遍历对象属性 2个可选参数 -->
+   <p v-for="(value, key, index ) in user">{{ index }}-{{key}}:{{value}}</p>
+
+   <span v-for="n in 10"> {{n}} </span>
+   <!--  使用数组方法会触发视图更新 push() pop() shift() ... -->
+   <!-- 注意 以下变动数组中 vue是不能检测到的 -->
+   <!-- app.books[3] ={}
+        app.books.length = 1
+  -->
+  <!-- 解决方法
+       方法 1 vue内置set方法
+       Vue.set(app.books,3,{})
+
+       方法 2 webpack 组件化方式 默认没有导入 Vue 这是可以使用$set
+       this.$set(app.book,3,{})
+
+       另一种
+       app.books.splice(3,1,{})
+
+       第二个问题也可以直接用splice
+       app.books.splice(1);
+
+  -->
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el : "#app",
+      data:{
+        books: [
+          {
+            name: 'vue',
+            author: 'lianghao'
+          },
+          {
+            name: 'js',
+            author: 'douglas'
+          },
+          {
+            name: 'js2',
+            author: 'nicholas'
+          }
+        ],
+        user: {
+          name: 'icon',
+          gender: 'boy',
+          age: 26
+        }
+      }
+    })
+  </script>
+</body>
+</html>

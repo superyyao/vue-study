@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <!--单个slot 用法-->
+  <!--子组件 child-component 的模板内定义了一个＜slot>元素，并且用一个＜p＞作为默认的内容，
+在父组件没有使用 slot 时，会渲染这段默认的文本；如果写入了 slot， 那就会替换整个＜slot> 。所
+以上例渲染后的结果为-->
+  <child-component>
+    <!--<p>分发的内容</p>-->
+    <!--<p>更多的分发内容</p>-->
+  </child-component>
+</div>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+  Vue.component('child-component',{
+    template: '\
+    <div>\
+      <slot>\
+         <p>如果父组件没有内容，我将作为默认出现</p>\
+     </slot>\
+   </div>',
+    data(){
+      return {
+        showChild: true
+      }
+    }
+  })
+  var app = new Vue({
+    el: "#app"
+  })
+</script>
+</body>
+</html>

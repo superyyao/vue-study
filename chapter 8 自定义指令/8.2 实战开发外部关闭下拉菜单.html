@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <div id="app">
+        <div class="main" v-clickoutside="handleClose">
+            <button @click="show = !show">click</button>
+            <div class="dropdown" v-show="show">
+                 <p>下拉框内容，点击外面区域可以关闭</p>
+            </div>
+        </div>
+        
+    </div>
+<body>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+    
+    // clickoutside.js
+    Vue.directive('clickoutside',{
+        bind: function (el,binding,vnode) {
+            function documentHandle(e) {
+                if (el.contains(e.target)) {
+                    //查看事件源中 el=> .main 是否包含 e => 点击返回的事件源
+                    return false;
+                }
+                if (binding.expression) {
+                    binding.expression = 'handleOpen';
+                    console.log(binding.expression);
+                    // binding.value()用于执行 定义的handleClose函数
+                    binding.value(e);
+                }
+            }
+            el.__vueClickOutside__ = documentHandle;
+            document.addEventListener('click',documentHandle);
+        },
+        //自定义组件不能使用this.xxx 形式在上下文中声明一个变量，所以用el.xxx引用documentHandle
+        //组件销毁时需要移除监听事件，否则任然存在与内存中
+        unbind: function (el, binding) {
+            document.removeEventListener('click',el.__vueClickOutside__);
+            delete el.__vueClickOutside__;
+        },
+        update:function (el,binding){
+                
+                
+        }
+
+    });
+    
+    //index.js
+    var app = new Vue({
+        el: '#app',
+        data: {
+            show: false
+        },
+        methods:{
+            handleClose: function (e) {
+                console.log(222);
+                this.show = false;
+            },
+            handleOpen: function (e){
+                console.log(1111);
+                var r = parInt(Math.random()) ;
+                var g = parInt(Math.random()) ;
+                var b =parInt(Math.random()) ;
+                e.target.style.backgroundColor = 'rab('+ r +','+ g + ','+b+")";
+            }
+
+        }
+    })
+    </script>
+</body>
+
+</html>

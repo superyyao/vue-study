@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <!--showChild 绑定的是父组件的数据 -->
+  <child-component></child-component>
+</div>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+  Vue.component('child-component',{
+    template: '<div v-show="showChild">子组件</div>',
+    data(){
+      return {
+        showChild: true
+      }
+    }
+  })
+  var app = new Vue({
+    el: "#app"
+  })
+</script>
+</body>
+</html>

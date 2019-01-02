@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- v-else-if 要紧跟 v-if v-else紧跟 v-else-if 或 v-if -->
+  <div id="app">
+    <p v-if="status === 1">当status 为1时显示该行</p>
+    <p v-else-if="status === 2">当status 为2时显示该行</p>
+    <p v-else>否者显示该行</p>
+
+    <!-- 如果一次判断多个元素 vue内置 template 使用条件指令 -->
+    <template v-if="status === 1">
+        <p>text</p>
+        <p>text</p>
+        <p>text</p>
+    </template>
+
+    <!-- vue渲染元素 效率考虑 会竟可能复用已有元素 -->
+
+    <template v-if="type === 'name'">
+      <label>user:</label>
+      <input placeholder="username">
+    </template>
+    <template v-else>
+      <label>email:</label>
+      <input placeholder="email address">
+    </template>
+    <button @click="handleToggleClick">toggle type</button>
+
+    <hr>
+
+    <!--  因为上面的切换中 input值被复用， 如果不想复用 使用 key  但是要唯一 -->
+    <template v-if="type === 'name'">
+      <label>user:</label>
+      <input placeholder="username" key="name-input">
+    </template>
+    <template v-else>
+      <label>email:</label>
+      <input placeholder="email address" key="email-input">
+    </template>
+    <button @click="handleToggleClick">toggle type</button>
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el : "#app",
+      data:{
+        status : 1,
+        type: 'name'
+      },
+      methods: {
+        handleToggleClick : function () {
+          this.type = this.type === 'name' ? 'email' : 'name';
+        }
+      }
+    })
+  </script>
+</body>
+</html>

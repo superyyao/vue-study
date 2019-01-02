@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- v-cloak 会在vue实例借宿编译时从绑定的html元素移除 -->
+  <!-- v-cloak 经常和css display:none 配合使用 -->
+  <!-- 在网速较慢时候  vue。js还未加载完成先显示 {{message}}
+        这个过程屏幕有闪动 只需添加css
+        [v-cloak]{
+        display: none;
+      }
+  -->
+  <div id="app" v-cloak>
+    {{message}}
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el : "#app",
+      data:{
+        message: 'text'
+      }
+    })
+  </script>
+</body>
+</html>

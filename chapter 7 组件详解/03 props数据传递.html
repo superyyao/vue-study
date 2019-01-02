@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- props 声明需从父级接收数据 props 可以是字符串 或者 对象 -->
+    <my-component :message="message"></my-component>
+    <!-- props 与 data 不同在于 data来自组件自己数据 props 来自 父级传递的数据 -->
+    <!-- 当使用dom模板时，驼峰命名的props名称要转换为短横分隔命名 -->
+    <my-components warning-text="12345678"></my-components>
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+     Vue.component('my-component',{
+       props:['message'],
+       template: '<div>{{message}}</div>'
+     });
+     Vue.component('my-components',{
+       props:['warningText'],
+       template: '<div>{{warningText}}</div>'
+     });
+     var app = new Vue({
+       el: '#app',
+       data () {
+         return {
+          message :123
+         }
+       }
+     });
+  </script>
+</body>
+</html>

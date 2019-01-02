@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 父组件的原始值不需要被改变，只改变子组件值 -->
+    <!-- 在自己作用域中 自由修改 不影响 父组件的初始值 -->
+    <my-component :init-count="count"></my-component>
+
+    <!-- props需要被转变 -->
+    <my-component1 :my-style="100"></my-component1>
+
+
+    <!-- 注意 js中对象和数组是引用类型 指向同一个内存空间
+         所以 props
+   -->
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+     Vue.component('my-component',{
+       props:['initCount'],
+       template: '<div @click="add">{{count}}</div>',
+       data: function () {
+         return {
+           count: this.initCount
+         }
+       },
+       methods:{
+         add: function (){
+           this.count++;
+         }
+       }
+     });
+     Vue.component('my-component1',{
+       props:['myStyle'],
+       // template: '<div :style="style"></div>',
+       // computed:{
+       //   style: function () {
+       //     var oStyle = this.myStyle;
+       //     var _style ={}
+       //     for(var i in oStyle){
+       //       _style[i] = oStyle[i];
+       //     }
+       //     return _style;
+       //   }
+       // }
+       template: '<div :style="style"></div>',
+       computed:{
+         style: function () {
+           return {
+             width: this.myStyle+"px"
+           }
+         }
+       }
+     });
+
+     var app = new Vue({
+       el: '#app',
+       data: {
+         count: 2,
+         style:{
+           width: '100px',
+           height: '100px',
+           backgroundColor: 'red'
+         }
+       }
+     });
+  </script>
+</body>
+</html>

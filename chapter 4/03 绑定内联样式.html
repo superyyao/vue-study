@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- css属性 使用驼峰fontSize 或者 短横分隔命名 font-size -->
+    <div :style="{'color': color, 'fontSize': fontSize + 'px'}"></div>
+
+    <!-- data -->
+    <div :style="styles"></div>
+
+    <!-- computed -->
+    <div :style="computed"></div>
+
+    <!-- 多个样式对象 使用 array -->
+    <div :style="[styleA, styleB]"></div>
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el : "#app",
+      data:{
+        color: 'red',
+        fontSize: 14,
+        styles: {
+          color: 'red',
+          fontSize: 14 + 'px'
+        },
+        styleA: {
+          color: 'red',
+          fontSize: 14 + 'px'
+        },
+        styleB: {
+          backgroundColor: 'red',
+          width: 14 + 'px',
+          height: 14 + 'px'
+        }
+      },
+      computed: {
+        computed: function () {
+          return {
+            color: 'red',
+            fontSize: 14 + 'px'
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

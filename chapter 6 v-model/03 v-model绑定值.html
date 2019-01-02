@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 单选按钮 -->
+    <input type="radio" v-model="picked" :value="value" >
+    <label>单选按钮  </label>
+    <p > {{ picked }} </p>
+    <p > {{ value }} </p>
+
+    <!-- 复选框 -->
+    <input type="checkbox" v-model="toggle" :true-value="value1" :false-value="value2">
+    <label>复选框</label>
+    <p>{{toggle}}</p>
+    <p>{{value1}}</p>
+    <p>{{value2}}</p>
+    <!-- 勾选时 app.toggle === app.value1 反之  app.toggle === app.value2 -->
+
+
+    <!--  -->
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js "></script>
+  <script>
+     var app = new Vue({
+       el: '#app',
+       data: {
+         picked: false,
+         value: 123,
+         toggle: false,
+         value1: 'a',
+         value2: 'b'
+       },
+       methods: {
+
+       }
+     })
+  </script>
+</body>
+</html>

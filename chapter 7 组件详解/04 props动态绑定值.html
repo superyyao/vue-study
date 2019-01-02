@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 动态绑定值 可以使用 v-bind来动态绑定 -->
+    <input type="text" v-model="parentMessage">
+    <my-component :message="parentMessage"></my-component>
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+     Vue.component('my-component',{
+       props:['message'],
+       template: '<div>{{message}}</div>'
+     });
+
+     var app = new Vue({
+       el: '#app',
+       data: {
+         parentMessage: ""
+       }
+     });
+  </script>
+</body>
+</html>

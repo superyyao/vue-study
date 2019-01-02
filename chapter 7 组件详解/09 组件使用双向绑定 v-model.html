@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 实现双向绑定的v-model组件要满足
+         1.接收一个新的value属性
+         2.接收新的value时触发input事件
+   -->
+    <p>总数:{{ total }}</p>
+    <my-component v-model="total"></my-component>
+    <my-component @input="handleGetTotal"></my-component>
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('my-component',{
+      props: {
+        value: {
+            type: [String,Number]
+        }
+      }, 
+      template:'<button @click="handleClick">+1 {{ value }}</button>',
+      data: function () {
+        return {
+          counter: 0
+        }
+      },
+      methods:{
+        handleClick: function () {
+          this.counter++;
+          this.$emit('input', this.counter);
+        }
+      }
+    });
+    var app = new Vue({
+      el: '#app',
+      data: {
+        total: 5
+      },
+      methods: {
+        handleGetTotal: function (total) {
+          this.total = total
+        }
+      }
+    });
+  </script>
+</body>
+</html>

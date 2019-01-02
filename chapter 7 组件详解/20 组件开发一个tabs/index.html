@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div id="app">
+        <tabs v-model="activeKey">
+            <pane label="标签" name="1" closable="true">标签</pane>
+            <pane label="标签1" name="2"  closable="true">标签2</pane>
+            <pane label="标签2" name="3"  closable="false">标签3</pane>
+        </tabs>
+    </div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script src="./tabs.js"></script>
+    <script src="./pane.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data () {
+                return {
+                    activeKey:'3'
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

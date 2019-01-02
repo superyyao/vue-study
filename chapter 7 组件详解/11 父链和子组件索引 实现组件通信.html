@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+  <!-- 尽管vue 允许这样操作但要尽可能避免依赖父组件的数据，更不应该主动修改它的数据-->
+  <!-- 理想情况 只有组件自己能修改她的状态，父子组件最好还是通过props 和 $emit 来通信-->
+  {{message}}
+  <component-a></component-a>
+
+
+  <!--子组件索引 用this.$children遍历比较困难 添加特殊的 ref 来指定一个索引名称-->
+  <button type="button" @click="handleRef">ref获取子组件实例</button>
+  <component-b ref="comB"></component-b>
+</div>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+  Vue.component('component-a',{
+    template:'<button @click="handleEvent">通过父链直接修改数据</button>',
+    methods:{
+      handleEvent: function () {
+        this.$parent.message= "来自组件 conponent -a";
+      }
+    }
+  });
+  Vue.component('component-b',{
+    template:'<button>子组件</button>',
+    data(){
+      return {
+        message: 'demo'
+      }
+    }
+  });
+  var app = new Vue({
+
+    el: "#app",
+    data(){
+      return {
+        message: '123'
+      }
+    },
+    methods: {
+      handleRef: function () {
+        var msg = this.$refs.comB.message;
+        console.log(msg)
+      }
+    }
+  });
+</script>
+</body>
+</html>

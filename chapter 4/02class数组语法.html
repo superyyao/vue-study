@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div :class="[active, error]"></div>
+    <!-- 三元写法 -->
+    <div :class="[isActive ? active : '', error]"></div>
+
+    <!-- data、computed 、methods 三种结合 -->
+    <button type="button" :class="classes">data \ computed \ methods</button>
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+  <script>
+    new Vue({
+      el : "#app",
+      data:{
+        isActive: true,
+        active: 'active',
+        error: 'error',
+        size: 'large',
+        disabled: true
+      },
+      computed: {
+        classes: function () {
+          return [
+          'btn',
+          {
+            ['btn-' + this.size] : this.size !=='',
+            ['btn-disabled'] : this.disabled
+          }
+          ]
+        }
+      }
+    })
+  </script>
+</body>
+</html>

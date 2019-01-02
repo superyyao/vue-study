@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <demo :init-count="count"  @increase="handleGetCount" @reduce="handleGetCount"></demo>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('demo', {
+            props:{
+                initCount:{
+                type:Number,
+                default(){
+                  return 1;
+                }
+              }
+            },
+            template: '\
+              <div>\
+                <input type="text" :value="count"/>\
+                <button type="button"  @click="handleIncrease"> + </button>\
+                <button type="button"  @click="handleReduce"> - </button>\
+              </div>',
+            data: function () {
+                return {
+                    count: this.initCount
+                }
+            },
+
+            methods: {
+                handleIncrease: function(){
+                    this.count++;
+                    this.$emit('increase', this.count);
+                },
+                handleReduce: function() {
+                    this.count--;
+                    this.$emit('reduce', this.count);
+                }
+            }
+        });
+        var app = new Vue({
+            el: '#app',
+            data: {
+                count: 2
+            },
+            methods: {
+                handleGetCount: function (total) {
+                    this.count = total
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

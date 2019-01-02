@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+     姓名 {{ fullname }}
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+  <script>
+  var myapp = new Vue({
+      el : "#app",
+      data:{
+        firstName: 'jack',
+        lastName: 'Green'
+      },
+      computed: {
+        fullname: {
+          set: function (newValue) {
+            var names = newValue.split(' ');
+            this.firstName = names[0];
+            this.lastName = names[names.length - 1];
+          },
+          get: function (){
+            return this.firstName + ' ' + this.lastName;
+          }
+        }
+      }
+    })
+
+    myapp.fullname = 'michael jordan'
+  </script>
+</body>
+</html>
